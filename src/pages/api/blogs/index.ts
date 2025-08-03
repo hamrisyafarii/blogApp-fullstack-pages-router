@@ -7,7 +7,7 @@ export default async function handler(
   res: NextApiResponse
 ) {
   try {
-    await dbConnect();
+    await dbConnect(process.env.MONGODB_URI as string);
 
     if (req.method === "GET") return getBlogs(res);
     if (req.method === "POST") {

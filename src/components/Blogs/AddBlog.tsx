@@ -48,9 +48,7 @@ const AddBlog = ({
         imageURL: blog.imageURL ?? "",
       });
     }
-  }, [blog, open]);
 
-  useEffect(() => {
     if (!blog && open) {
       setFormData(initialState);
     }
@@ -79,7 +77,11 @@ const AddBlog = ({
       if (result?.success) {
         setFormData(initialState);
         setOpen?.(false);
-        toast("Berhasil menambahkan blog baru");
+        toast(
+          blog?._id
+            ? "Berhasil update data blog"
+            : "Berhasil menambahkan blog baru"
+        );
         router.refresh();
       }
     } catch (error) {

@@ -1,15 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import mongoose from "mongoose";
 
-const isConnected = false;
-
-const dbConnect = async () => {
-  if (isConnected) {
-    return;
-  }
+const dbConnect = async (uri: string) => {
   try {
-    if (mongoose.connections[0].readyState) return;
-    await mongoose.connect(process.env.MONGO_URI!);
+    const conecting = await mongoose.connect(uri);
+    console.log("Mongo db connect:", conecting.connection.host);
   } catch (error: any) {
     console.error(`Error ${error.message}`);
   }
